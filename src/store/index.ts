@@ -1,5 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { articlesReducer } from "./slices/articlesSlice";
+import {
+  articlesReducer,
+  changeAuthorFilter,
+  changeCategoryFilter,
+  changePage,
+  changeSortingOrder,
+} from "./slices/articlesSlice";
 
 export const store = configureStore({
   reducer: {
@@ -8,3 +14,9 @@ export const store = configureStore({
 });
 
 export * from "./thunks/fetchArticles";
+export {
+  changeAuthorFilter,
+  changeCategoryFilter,
+  changeSortingOrder,
+  changePage,
+};

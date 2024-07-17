@@ -8,7 +8,55 @@ import { url } from "../defaultImg";
 export default function ArticleList() {
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   const articles = useSelector((state: any) => {
-    return state.articles.data;
+    const selectedCategories = state.articles.appliedCategoryFilter;
+    const selectedAuthors = state.articles.appliedAuthorFilter;
+    const sortingOrder = state.articles.sorting;
+    const initialData = [...state.articles.data];
+    switch (sortingOrder) {
+      case "date-dsc":
+        initialData.sort((a: any, b: any) => {
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        });
+        break;
+      case "title-asc":
+        initialData.sort((a: any, b: any) => {
+          if (a.title > b.title) return 1;
+          return -1;
+        });
+        break;
+      case "title-dsc":
+        initialData.sort((a: any, b: any) => {
+          if (b.title > a.title) return 1;
+          return -1;
+        });
+        break;
+      default:
+        initialData.sort((a: any, b: any) => {
+          return new Date(a.date).getTime() - new Date(b.date).getTime();
+        });
+    }
+    // if no filter is selected
+    if (selectedAuthors.length === 0) {
+      if (selectedCategories.length === 0) {
+        return initialData;
+      }
+    }
+
+    // category wise filtering
+    let categoryFilteredData = initialData;
+    if (selectedCategories.length)
+      categoryFilteredData = initialData.filter((d: any) => {
+        return selectedCategories.indexOf(d.source) !== -1;
+      });
+
+    // author wise filtering
+    let finalData = categoryFilteredData;
+    if (selectedAuthors.length)
+      finalData = categoryFilteredData.filter((d: any) => {
+        return selectedAuthors.indexOf(d.author) !== -1;
+      });
+
+    return finalData;
   });
 
   useEffect(() => {
@@ -37,7 +85,7 @@ export default function ArticleList() {
             </div>
             <div>
               <div className="date-source-container">
-                <div>{article.date}</div>
+                <div>{new Date(article.date).toDateString()}</div>
                 <div>{article.source}</div>
               </div>
 

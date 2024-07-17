@@ -21,4 +21,11 @@
   padding: 10px;
 }
 
+.sort-icons {
+  display: inline-flex;
+  padding-left: 65%;
+}
 
+input {
+  margin-right: 10px;;
+}
