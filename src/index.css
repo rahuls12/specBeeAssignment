@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.main-grid-container {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  padding: 10px;
+}
+
+.date-source-container {
+  display: grid;
+  grid-template-columns: 30% 20%;
+  gap: 50%;
+}
+
+.article-preview-container {
+  display: grid;
+  grid-template-columns: 15% 80%;
+  gap: 5%;
+  padding: 10px;
+}
+
+
