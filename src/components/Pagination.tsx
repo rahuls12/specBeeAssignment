@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-import { changeSortingOrder } from "../store";
+import { changePage } from "../store";
 
 export default function Pagination() {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export default function Pagination() {
   let renderedContent;
 
   const handlePageChange = (op: number) => {
-    dispatch(changeSortingOrder(currentPage + op));
+    dispatch(changePage(currentPage + op));
   };
   if (currentPage !== 1 && currentPage !== totalPages) {
     renderedContent = (
@@ -97,7 +97,7 @@ export default function Pagination() {
   }
 
   return (
-    <div>
+    <div style={{cursor:'pointer', display:'inline-flex'}}>
       <FaAngleLeft
         onClick={() => {
           handlePageChange(-1);

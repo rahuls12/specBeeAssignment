@@ -12,6 +12,7 @@ export default function ArticleList() {
     const selectedAuthors = state.articles.appliedAuthorFilter;
     const sortingOrder = state.articles.sorting;
     const initialData = [...state.articles.data];
+    const currentPage = state.articles.currentPage;
     switch (sortingOrder) {
       case "date-dsc":
         initialData.sort((a: any, b: any) => {
@@ -50,13 +51,22 @@ export default function ArticleList() {
       });
 
     // author wise filtering
-    let finalData = categoryFilteredData;
+    let authorFilteredData = categoryFilteredData;
     if (selectedAuthors.length)
-      finalData = categoryFilteredData.filter((d: any) => {
+      authorFilteredData = categoryFilteredData.filter((d: any) => {
         return selectedAuthors.indexOf(d.author) !== -1;
       });
 
-    return finalData;
+    // pagination
+    // const finalData = authorFilteredData.filter((d: any, index: number) => {
+    //   console.log(index);
+    //   let startingIndex = (currentPage - 1) * 5;
+
+    //   return index >= startingIndex && index <= startingIndex + 5;
+    // });
+
+    // return finalData;
+    return authorFilteredData;
   });
 
   useEffect(() => {

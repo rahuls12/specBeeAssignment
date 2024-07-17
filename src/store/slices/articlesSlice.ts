@@ -24,9 +24,11 @@ const articlesSlice = createSlice({
       state.sorting = action.payload;
     },
     changePage(state, action) {
-      if (action.payload! < 1 && action.payload! > state.totalPages) {
-        state.currentPage = action.payload;
-      }
+      if (action.payload < 1) {
+        state.currentPage = 1;
+      } else if (action.payload > state.totalPages) {
+        state.currentPage = state.totalPages;
+      } else state.currentPage = action.payload;
     },
   },
   extraReducers(builder) {
