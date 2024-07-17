@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  font-family: ui-monospace;
+}
 .main-grid-container {
   display: grid;
   grid-template-columns: 30% 70%;
@@ -27,5 +30,26 @@
 }
 
 input {
-  margin-right: 10px;;
+  margin-right: 10px;
+}
+
+.date-div {
+  font-size: small;
+  color: gray;
+}
+
+.title-div {
+  font-size: large;
+
+  font-weight: bolder;
+}
+
+p {
+  line-height: normal;
+  font-size: medium;
+}
+
+.author-div{
+  font-size: medium;
+  font-weight: 800;
 }

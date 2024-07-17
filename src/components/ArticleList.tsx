@@ -95,20 +95,26 @@ export default function ArticleList() {
             </div>
             <div>
               <div className="date-source-container">
-                <div>{new Date(article.date).toDateString()}</div>
-                <div>{article.source}</div>
+                <div className="date-div">
+                  {article.date ? new Date(article.date).toDateString() : ""}
+                </div>
+                <div className="date-div">{article.source}</div>
               </div>
 
               <div>
-                <h2 dangerouslySetInnerHTML={{ __html: article.title }}></h2>
+                <h2
+                  className="title-div"
+                  dangerouslySetInnerHTML={{ __html: article.title }}
+                ></h2>
               </div>
             </div>
           </div>
           <div
+            className="content-div"
             style={{ width: "100%" }}
             dangerouslySetInnerHTML={{ __html: article.body }}
           ></div>
-          <div>{article.author}</div>
+          <div className="author-div">{article.author}</div>
           <hr />
         </div>
       );
