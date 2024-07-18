@@ -1,9 +1,19 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchArtices } from "../store";
+import { changeTotalPage, fetchArtices } from "../store";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { url } from "../defaultImg";
+import Pagination from "./Pagination";
+
+const paginatedContent = (initData: any, currentPage: number) => {
+  return initData.filter((d: any, index: number) => {
+    console.log(index);
+    let startingIndex = (currentPage - 1) * 5;
+
+    return index >= startingIndex && index < startingIndex + 5;
+  });
+};
 
 export default function ArticleList() {
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
@@ -39,7 +49,7 @@ export default function ArticleList() {
     // if no filter is selected
     if (selectedAuthors.length === 0) {
       if (selectedCategories.length === 0) {
-        return initialData;
+        return paginatedContent(initialData, currentPage);
       }
     }
 
@@ -57,16 +67,7 @@ export default function ArticleList() {
         return selectedAuthors.indexOf(d.author) !== -1;
       });
 
-    // pagination
-    // const finalData = authorFilteredData.filter((d: any, index: number) => {
-    //   console.log(index);
-    //   let startingIndex = (currentPage - 1) * 5;
-
-    //   return index >= startingIndex && index <= startingIndex + 5;
-    // });
-
-    // return finalData;
-    return authorFilteredData;
+    return paginatedContent(authorFilteredData, currentPage);
   });
 
   useEffect(() => {
@@ -88,6 +89,7 @@ export default function ArticleList() {
                 style={{
                   border: "0.5px solid lightslategrey",
                   borderRadius: "10px",
+                  height: "70%",
                 }}
                 src={url}
                 alt="img"
@@ -120,5 +122,10 @@ export default function ArticleList() {
       );
     });
 
-  return <div>{renderedItems}</div>;
+  return (
+    <div>
+      {renderedItems}
+      <Pagination />
+    </div>
+  );
 }

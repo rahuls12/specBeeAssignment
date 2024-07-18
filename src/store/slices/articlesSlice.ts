@@ -30,6 +30,9 @@ const articlesSlice = createSlice({
         state.currentPage = state.totalPages;
       } else state.currentPage = action.payload;
     },
+    changeTotalPage(state, action) {
+      state.totalPages = action.payload;
+    },
   },
   extraReducers(builder) {
     builder.addCase(fetchArtices.pending, (state, action) => {
@@ -50,4 +53,5 @@ export const {
   changeAuthorFilter,
   changeSortingOrder,
   changePage,
+  changeTotalPage,
 } = articlesSlice.actions;

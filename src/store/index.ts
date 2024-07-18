@@ -5,6 +5,7 @@ import {
   changeCategoryFilter,
   changePage,
   changeSortingOrder,
+  changeTotalPage,
 } from "./slices/articlesSlice";
 
 export const store = configureStore({
@@ -19,4 +20,5 @@ export {
   changeCategoryFilter,
   changeSortingOrder,
   changePage,
+  changeTotalPage,
 };

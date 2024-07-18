@@ -97,7 +97,15 @@ export default function Pagination() {
   }
 
   return (
-    <div style={{cursor:'pointer', display:'inline-flex'}}>
+    <div
+      style={{
+        cursor: "pointer",
+        display: "inline-flex",
+        position: "relative",
+        paddingTop: "10px",
+        paddingLeft: "90%",
+      }}
+    >
       <FaAngleLeft
         onClick={() => {
           handlePageChange(-1);
