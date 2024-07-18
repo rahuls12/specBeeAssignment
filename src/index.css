@@ -48,7 +48,15 @@ p {
   font-size: medium;
 }
 
-.author-div{
+.author-div {
   font-size: medium;
   font-weight: 800;
+}
+
+.no-items {
+  font-size: x-large;
+  font-weight: bolder;
+  position: fixed;
+  top: 40%;
+  right: 40%;
 }

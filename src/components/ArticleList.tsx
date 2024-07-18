@@ -8,9 +8,7 @@ import Pagination from "./Pagination";
 
 const paginatedContent = (initData: any, currentPage: number) => {
   return initData.filter((d: any, index: number) => {
-    console.log(index);
     let startingIndex = (currentPage - 1) * 5;
-
     return index >= startingIndex && index < startingIndex + 5;
   });
 };
@@ -121,11 +119,11 @@ export default function ArticleList() {
         </div>
       );
     });
-
+  const noItemToRender = <h1 className="no-items">No Items to Render.</h1>;
   return (
     <div>
-      {renderedItems}
-      <Pagination />
+      {articles.length ? renderedItems : noItemToRender}
+      {articles.length ? <Pagination /> : ""}
     </div>
   );
 }
