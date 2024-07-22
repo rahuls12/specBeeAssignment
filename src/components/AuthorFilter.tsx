@@ -17,7 +17,7 @@ export default function AuthorFilter() {
       selectedAuthorFilters: state.articles.appliedAuthorFilter,
     };
   });
-  const renderedAuthor = authorFilters.map((f: any) => {
+  const renderedAuthor = authorFilters.map((f: any, index: number) => {
     const checked = selectedAuthorFilters.indexOf(f) !== -1;
     const categoryFilterChange = (f: string, e: boolean) => {
       const tempArr = [...selectedAuthorFilters];
@@ -30,7 +30,7 @@ export default function AuthorFilter() {
       dispatch(changeAuthorFilter(tempArr));
     };
     return (
-      <div>
+      <div key={index}>
         <input
           type="checkbox"
           checked={checked}
@@ -44,7 +44,11 @@ export default function AuthorFilter() {
   });
   return (
     <div>
-      <p style={{fontWeight: 'bold'}}>Author</p>
+      <p
+        style={{ fontWeight: "bold", backgroundColor: "#F8F9FA", width: "90%" }}
+      >
+        Author
+      </p>
       {renderedAuthor}
     </div>
   );

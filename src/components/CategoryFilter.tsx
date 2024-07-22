@@ -19,7 +19,7 @@ export default function CategoryFilter() {
       };
     }
   );
-  const renderedCategory = categoryFilters.map((f: any) => {
+  const renderedCategory = categoryFilters.map((f: any, index: number) => {
     const checked = selectedCategoryFilters.indexOf(f) !== -1;
     const categoryFilterChange = (f: string, e: boolean) => {
       const tempArr = [...selectedCategoryFilters];
@@ -32,7 +32,7 @@ export default function CategoryFilter() {
       dispatch(changeCategoryFilter(tempArr));
     };
     return (
-      <div>
+      <div key={index}>
         <input
           type="checkbox"
           checked={checked}
@@ -46,7 +46,11 @@ export default function CategoryFilter() {
   });
   return (
     <div>
-      <p style={{ fontWeight: "bold" }}>Category</p>
+      <p
+        style={{ fontWeight: "bold", backgroundColor: "#F8F9FA", width: "90%" }}
+      >
+        Category
+      </p>
       {renderedCategory}
     </div>
   );

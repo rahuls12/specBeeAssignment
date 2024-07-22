@@ -48,7 +48,7 @@ export default function SortingOptions() {
 
   return (
     <div>
-      <p style={{ fontWeight: "bold" }}>Sort By</p>
+      <p style={{ fontWeight: "bold", backgroundColor: '#F8F9FA', width: "90%" }}>Sort By</p>
       <div>
         <input
           checked={currentSortingOption.split("-")[0] === "date"}

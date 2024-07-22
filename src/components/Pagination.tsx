@@ -27,6 +27,7 @@ export default function Pagination() {
           {currentPage - 1}
         </span>
         <span
+        className="selected"
           onClick={() => {
             handlePageChange(0);
           }}
@@ -46,6 +47,7 @@ export default function Pagination() {
     renderedContent = (
       <div>
         <span
+          className="selected"
           onClick={() => {
             handlePageChange(0);
           }}

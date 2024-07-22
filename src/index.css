@@ -5,22 +5,30 @@
 * {
   font-family: ui-monospace;
 }
+
+.article-preview {
+  cursor: pointer;
+}
+
 .main-grid-container {
   display: grid;
-  grid-template-columns: 25% 70%;
+  grid-template-columns: 25% 65%;
   padding: 10px;
+  gap: 1%;
 }
 
 .date-source-container {
   display: grid;
   grid-template-columns: 30% 20%;
-  gap: 50%;
+  gap: 65%;
 }
 
 .article-preview-container {
   display: grid;
-  grid-template-columns: 15% 80%;
-  padding: 10px;
+  grid-template-columns: 10% 90%;
+  padding: 10px 10px 0 10px;;
+  height: 18vh;
+  gap: 2%;
 }
 
 .sort-icons {
@@ -49,7 +57,9 @@ p {
 }
 
 .author-div {
-  font-size: medium;
+  font-size: small;
+  margin-top: 1%;
+  margin-bottom: 2%;
   font-weight: 800;
 }
 
@@ -59,4 +69,15 @@ p {
   position: fixed;
   top: 40%;
   right: 40%;
+}
+
+span {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.selected {
+  background-color: black;
+  color: white;
+  border-radius: 6px;
 }

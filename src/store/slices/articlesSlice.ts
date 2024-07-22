@@ -15,12 +15,15 @@ const articlesSlice = createSlice({
   },
   reducers: {
     changeCategoryFilter(state, action) {
+      state.currentPage = 1;
       state.appliedCategoryFilter = action.payload;
     },
     changeAuthorFilter(state, action) {
+      state.currentPage = 1;
       state.appliedAuthorFilter = action.payload;
     },
     changeSortingOrder(state, action) {
+      state.currentPage = 1;
       state.sorting = action.payload;
     },
     changePage(state, action) {

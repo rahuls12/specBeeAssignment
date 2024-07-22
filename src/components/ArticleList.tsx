@@ -1,71 +1,32 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeTotalPage, fetchArtices } from "../store";
+import { fetchArtices } from "../store";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { url } from "../defaultImg";
 import Pagination from "./Pagination";
-
-const paginatedContent = (initData: any, currentPage: number) => {
-  return initData.filter((d: any, index: number) => {
-    let startingIndex = (currentPage - 1) * 5;
-    return index >= startingIndex && index < startingIndex + 5;
-  });
-};
+import sortBy from "../helper/sortBy";
+import setFilters from "../helper/setFilter";
+import { ShimmerContentBlock } from "react-shimmer-effects";
 
 export default function ArticleList() {
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+  const mainUrl = "https://dummy-rest-api.specbee.site";
+
   const articles = useSelector((state: any) => {
     const selectedCategories = state.articles.appliedCategoryFilter;
     const selectedAuthors = state.articles.appliedAuthorFilter;
     const sortingOrder = state.articles.sorting;
     const initialData = [...state.articles.data];
     const currentPage = state.articles.currentPage;
-    switch (sortingOrder) {
-      case "date-dsc":
-        initialData.sort((a: any, b: any) => {
-          return new Date(b.date).getTime() - new Date(a.date).getTime();
-        });
-        break;
-      case "title-asc":
-        initialData.sort((a: any, b: any) => {
-          if (a.title > b.title) return 1;
-          return -1;
-        });
-        break;
-      case "title-dsc":
-        initialData.sort((a: any, b: any) => {
-          if (b.title > a.title) return 1;
-          return -1;
-        });
-        break;
-      default:
-        initialData.sort((a: any, b: any) => {
-          return new Date(a.date).getTime() - new Date(b.date).getTime();
-        });
-    }
+    sortBy(sortingOrder, initialData);
     // if no filter is selected
-    if (selectedAuthors.length === 0) {
-      if (selectedCategories.length === 0) {
-        return paginatedContent(initialData, currentPage);
-      }
-    }
-
-    // category wise filtering
-    let categoryFilteredData = initialData;
-    if (selectedCategories.length)
-      categoryFilteredData = initialData.filter((d: any) => {
-        return selectedCategories.indexOf(d.source) !== -1;
-      });
-
-    // author wise filtering
-    let authorFilteredData = categoryFilteredData;
-    if (selectedAuthors.length)
-      authorFilteredData = categoryFilteredData.filter((d: any) => {
-        return selectedAuthors.indexOf(d.author) !== -1;
-      });
-
-    return paginatedContent(authorFilteredData, currentPage);
+    return setFilters(
+      selectedAuthors,
+      selectedCategories,
+      initialData,
+      currentPage
+    );
   });
 
   useEffect(() => {
@@ -74,7 +35,7 @@ export default function ArticleList() {
 
   const renderedItems =
     articles &&
-    articles.map((article: any) => {
+    articles.map((article: any, index: number) => {
       return (
         <div
           className="article-preview"
@@ -89,7 +50,7 @@ export default function ArticleList() {
                   borderRadius: "10px",
                   height: "70%",
                 }}
-                src={url}
+                src={article.image ? mainUrl + article.image : url}
                 alt="img"
               />
             </div>
