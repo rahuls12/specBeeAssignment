@@ -7,7 +7,6 @@ import { url } from "../defaultImg";
 import Pagination from "./Pagination";
 import sortBy from "../helper/sortBy";
 import setFilters from "../helper/setFilter";
-import { ShimmerContentBlock } from "react-shimmer-effects";
 
 export default function ArticleList() {
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
